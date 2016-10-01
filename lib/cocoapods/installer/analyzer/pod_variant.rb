@@ -47,9 +47,17 @@ module Pod
             specs == other.specs &&
             platform == other.platform &&
             requires_frameworks == other.requires_frameworks &&
-            swift_version == other.swift_version
+            swift_version_eql?(other.swift_version)
         end
         alias_method :eql?, :==
+
+        def swift_version_eql?(other_version)
+          if swift_version.nil? || other_version.nil?
+            true
+          else
+            swift_version == other_version
+          end
+        end
 
         # Hashes the instance by all its attributes.
         #
@@ -57,7 +65,7 @@ module Pod
         #
         # @!visibility private
         def hash
-          [specs, platform, requires_frameworks, swift_version].hash
+          [specs, platform, requires_frameworks].hash
         end
       end
     end
