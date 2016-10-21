@@ -17,6 +17,7 @@ module Pod
   describe Validator do
     before do
       Validator.any_instance.stubs(:xcodebuild).returns('')
+      Validator.any_instance.stubs(:xcodebuild_available?).returns(true)
     end
 
     # @return [void]
